@@ -9,7 +9,7 @@
   "scripts": {
     "build": "tsc -p ./",
     "start": "node src/index.ts",
-    "setup" : "docker build . -t inventoryapi && docker run --rm -it -p 8000:8000/tcp inventoryapi:latest" 
+    "setup" : "docker build . -t recipeApi && docker run --rm -it -p 8000:8000/tcp recipeApi:latest" 
   },
   "devDependencies": {
     "@tsconfig/recommended": "^1.0.1",

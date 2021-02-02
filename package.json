@@ -8,7 +8,8 @@
   },
   "scripts": {
     "build": "tsc -p ./",
-    "start": "nodemon /src/index.ts"
+    "start": "node src/index.ts",
+    "setup" : "docker build . -t inventoryapi && docker run --rm -it -p 8000:8000/tcp inventoryapi:latest" 
   },
   "devDependencies": {
     "@tsconfig/recommended": "^1.0.1",

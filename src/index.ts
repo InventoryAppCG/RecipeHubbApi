@@ -1,5 +1,5 @@
-import express from 'express';
-import dotenv from 'dotenv'
+const express = require('express');
+const dotenv = require('dotenv') 
 
 
 dotenv.config()
@@ -9,5 +9,5 @@ const port = process.env.PORT || 3333
 
 app.get('/', (req, res) => res.send('Express + TypeScript Server'));
 app.listen(port, () => {
-  console.log(` Server is running at https://localhost:${port}`);
+  console.log(` Server is running at localhost:${port}`);
 })

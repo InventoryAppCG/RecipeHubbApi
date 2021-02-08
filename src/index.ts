@@ -5,6 +5,7 @@ const UserModel = require('./models/user.ts')
 const bodyParser = require('body-parser')
 // const UserModel = require('./models/user')
 
+//TODO: Abstract routes, update schema and add types for typescript
 mongoose.connect(
   process.env.MONGO_API_KEY,
   {

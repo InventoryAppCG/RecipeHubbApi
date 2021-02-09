@@ -1,11 +1,21 @@
-const mongoose = require('mongoose')
-const express = require('express');
-const dotenv = require('dotenv') 
-const UserModel = require('./models/user.ts')
-const bodyParser = require('body-parser')
-// const UserModel = require('./models/user')
 
-//TODO: Abstract routes, update schema and add types for typescript
+
+const express = require('express')
+let app = express();
+const path = require('path')
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
+const port = process.env.PORT || 3000;
+const routes = require('./routes.ts')
+const cors = require('cors')
+const bodyParser = require('body-parser')
+const mongoose = require('mongoose')
+
+
+// Middleware
+app.use(express.json())
+app.use(bodyParser.json())
+app.use(cors())
+
 mongoose.connect(
   process.env.MONGO_API_KEY,
   {
@@ -14,17 +24,10 @@ mongoose.connect(
   }
 );
 
-dotenv.config()
-const app = express();
-const port = process.env.PORT || 3333
-app.use(bodyParser.json())
-
-
-app.get('/', (req, res) => res.send('Express + TypeScript Server'));
 app.listen(port, () => {
-  console.log(` Server is running at localhost:${port}`);
-})
+  console.log("Recipe Heart Beets")
+});
 
-app.post('/create-user', (req, res) => {
-UserModel.create(req,res)
-})
+
+
+app = routes.register(app)

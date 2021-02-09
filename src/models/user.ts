@@ -2,12 +2,12 @@
 const userSchema = require('../schema/userSchema.ts')
 const user = require('../util/modelHelper.ts')
 const User = user.modelHelper('user', userSchema)
-
+// #TODO create a User class
 module.exports = {
-create: (req,res) => {
+create: (data) => {
     // //create user
     // //userModel
-    const myData = new User({ first_name: req.body.first_name, last_name: req.body.last_name });
+    const myData = new User({ firstName: data.first_name, lastName: data.last_name });
     myData
       .save()
       .then(item => {

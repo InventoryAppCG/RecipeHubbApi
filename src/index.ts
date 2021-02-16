@@ -25,7 +25,7 @@ mongoose.connect(
 );
 
 app.listen(port, () => {
-  console.log("Recipe Heart Beets")
+  console.log("Recipe Chicken Heart Beets")
 });
 
 

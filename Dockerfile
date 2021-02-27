@@ -19,4 +19,4 @@ COPY . .
 ENV SERVER_PORT 8080 
 
 EXPOSE 8000
-CMD [ "yarn", "dockerStart"]
+CMD [ "yarn", "start"]

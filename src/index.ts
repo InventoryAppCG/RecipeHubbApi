@@ -1,7 +1,6 @@
 
 
 import express from 'express'
-import { CLIENT_RENEG_LIMIT } from 'tls';
 let app = express();
 const path = require('path')
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
@@ -17,7 +16,6 @@ app.use(express.json())
 app.use(bodyParser.json())
 app.use(cors())
 
-console.log(process.env)
 mongoose.connect(
   process.env.MONGO_API_KEY,
   {
@@ -26,10 +24,14 @@ mongoose.connect(
   }
 );
 
+app.get('/', (req,res) => {
+  res.send("Recipe Chicken Heart Beets")
+})
+
+app = routes.register(app)
+
 app.listen(port, () => {
-  console.log("Recipe Chicken Heart Beets")
+  console.log(`Recipe Chicken Heart Beets http://localhost:${port}`)
 });
 
 
-
-app = routes.register(app)

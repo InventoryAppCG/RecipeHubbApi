@@ -9,6 +9,6 @@ module.exports = {
         })
         // app.use(require('./auth/AuthMiddleware.ts'))
         //all routes will be exported here
-        app.use("/user/", require("./UserRoutes/index.ts"));
+        app.use("/user/", require("./UserRoutes/index"));
     }
     }

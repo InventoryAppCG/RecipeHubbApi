@@ -1,7 +1,7 @@
 FROM node:14
 
 # Create app directory
-WORKDIR /app
+WORKDIR /app/
 
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
@@ -19,4 +19,4 @@ COPY . .
 ENV SERVER_PORT 8080 
 
 EXPOSE 8000
-CMD [ "yarn", "start" ]
+CMD [ "yarn", "dockerStart"]

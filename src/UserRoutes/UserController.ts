@@ -1,5 +1,5 @@
 
-const User = require('../schema/userSchema.ts');
+const User = require('../schema/userSchema');
 
 module.exports = {
     async index(req, res) {

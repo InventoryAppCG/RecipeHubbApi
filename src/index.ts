@@ -1,11 +1,11 @@
 
 
-const express = require('express')
+import express from 'express'
 let app = express();
 const path = require('path')
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
 const port = process.env.PORT || 3000;
-const routes = require('./routes.ts')
+const routes = require('./routes')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
@@ -17,7 +17,7 @@ app.use(bodyParser.json())
 app.use(cors())
 
 mongoose.connect(
-  process.env.MONGO_API_KEY,
+  "mongodb+srv://gman:1@learning-cluster-jurht.mongodb.net/SeniorProject?retryWrites=true",
   {
     useNewUrlParser: true,
     useUnifiedTopology: true

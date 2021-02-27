@@ -17,7 +17,7 @@ app.use(bodyParser.json())
 app.use(cors())
 
 mongoose.connect(
-  "mongodb+srv://gman:1@learning-cluster-jurht.mongodb.net/SeniorProject?retryWrites=true",
+  process.env.MONGO_API_KEY,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true

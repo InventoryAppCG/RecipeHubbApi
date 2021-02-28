@@ -28,10 +28,10 @@ app.get('/', (req,res) => {
   res.send("Recipe Chicken Heart Beets")
 })
 
-app = routes.register(app)
 
 app.listen(port, () => {
   console.log(`Recipe Chicken Heart Beets http://localhost:${port}`)
 });
 
+app = routes.register(app)
 

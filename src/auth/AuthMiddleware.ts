@@ -1,5 +1,4 @@
 module.exports = (req, res, next) => {
-console.log('headers',req.headers)
     if (req.headers.authorization !== process.env.AUTHORIZATION) {
         return res.send('Unauthorized')
     }

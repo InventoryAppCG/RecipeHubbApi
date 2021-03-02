@@ -50,11 +50,10 @@ module.exports = {
             // validation if the user doesn't throw error
           const userExists =  await  bcrypt.compare(req.body.password, authUser.password)
 
-           if(userExists) {
-               res.send('Login completed')
-               return;
-           }
-           res.send('Login not completed')
+           if(!userExists) {
+               throw new Error('Unable to login')
+        }
+            res.json({message: "Login Succeessfull", status: true})
 
         } catch(err) {
             console.log(err)

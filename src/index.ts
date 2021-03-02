@@ -25,7 +25,7 @@ mongoose.connect(
 );
 
 app.get('/', (req,res) => {
-  res.send("Recipe Chicken Heart Beets")
+  res.send("Unprotected Recipe Chicken Heart Beets")
 })
 
 

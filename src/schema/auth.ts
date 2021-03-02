@@ -19,10 +19,10 @@ const AuthSchema: Schema = new Schema({
 
 
 
-// exporting user model
-export const UserModel = model<AuthModel>('Auth', AuthSchema);
+// exporting Auth model
+export const AuthModel = model<AuthModel>('Auth', AuthSchema);
 
 // exporting interface / querying
-export interface IUserModel extends Model<AuthModel> {
+export interface IAuthModel extends Model<AuthModel> {
     findByEmail(email, cb);
 }

@@ -5,6 +5,6 @@ const controller = require('./UserController')
 route.post('/', controller.create)
 route.get('/', controller.read)
 route.put('/:email', controller.update)
-route.delete('/', controller.delete)
+route.delete('/:email', controller.delete)
 
 module.exports = route

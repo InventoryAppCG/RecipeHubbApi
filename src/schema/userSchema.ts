@@ -3,12 +3,12 @@ import {ObjectId} from 'mongodb'
 
 interface UserModel extends Document {
     author: ObjectId
-    userName: string
-    firstName: string,
-    lastName: string,
-    email: string,
-    profilePic: string,
-    numRecipes: number
+    userName: String
+    firstName: String,
+    lastName: String,
+    email: String,
+    profilePic: String,
+    numRecipes: Number
 }
 
 const UserSchema: Schema = new Schema({
@@ -38,7 +38,7 @@ const UserSchema: Schema = new Schema({
         },
         numRecipes: {
             type: Number,
-            default: null
+            default: 0
         },
 });
 

@@ -7,6 +7,6 @@ module.exports = {
         app.use("/user/", require("./User"));
         // app.use("/recipe/", require("./Recipe"));
         // app.use("/comments/", require("./Comments"));
-        // app.use("/user-auth/", require("./UserAuth"));
+        app.use("/user-auth/", require("./UserAuth"));
     }
 }

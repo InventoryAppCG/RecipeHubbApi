@@ -43,31 +43,31 @@ module.exports = {
 
     },
 
-    async read(req, res) {
+    async read(req,res) {
         try {
-            const authUser = Auth.AuthModel.find({})
-            res.json(authUser)
+        const authUser = Auth.AuthModel.find({})
+        res.json(authUser)
 
-        } catch (err) {
+        } catch(err) {
             console.log(err)
             res.status(404).send('Error Showing auth user')
         }
     },
     async login(req, res) {
         try {
-            const authUser = await Auth.AuthModel.findOne({ email: req.body.email })
+            const authUser = await Auth.AuthModel.findOne({email: req.body.email})
 
             // validation if the user doesn't throw error
-            const userExists = await bcrypt.compare(req.body.password, authUser.password)
+          const userExists =  await  bcrypt.compare(req.body.password, authUser.password)
 
-            if (!userExists) {
-                throw new Error('Unable to login')
-            }
-            res.json({ message: "Login Succeessfull", status: true })
+           if(!userExists) {
+               throw new Error('Unable to login')
+        }
+            res.json({message: "Login Succeessfull", status: true})
 
-        } catch (err) {
+        } catch(err) {
             console.log(err)
             res.status(404).send('Unable to login')
         }
-    }
+    } 
 }

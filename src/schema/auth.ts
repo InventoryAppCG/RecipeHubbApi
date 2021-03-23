@@ -19,7 +19,11 @@ const AuthSchema: Schema = new Schema({
 
 
 
+<<<<<<< HEAD
+// exporting user model
+=======
 // exporting Auth model
+>>>>>>> main
 export const AuthModel = model<AuthModel>('Auth', AuthSchema);
 
 // exporting interface / querying

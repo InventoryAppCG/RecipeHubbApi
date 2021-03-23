@@ -1,32 +1,42 @@
-import { createLogicalNot } from "typescript"
+import { CLIENT_RENEG_LIMIT } from "node:tls";
 
-
+export { }
 const Auth = require('../schema/auth.ts')
 const bcrypt = require('bcrypt')
+const User = require('../schema/userSchema');
+const jwt = require('../util/jwt.ts')
+
 
 
 module.exports = {
-    async create(req, res)  {
+    async create(req, res) {
         try {
-        // jwt token (userEmail, userPassword)
+            // jwt token (userEmail, userPassword)
+            // take user password
+            // hash password
+            // save to auth database
+            // verification: email -> password: characters/symbols, email isn't stored in db
+            const password = req.body.password
+            const email = req.body.email
+            const userName = req.body.username
+            const saltRounds = process.env.SALT // store in env
+            const hash = await bcrypt.hash(password, Number(saltRounds))
 
-        // take user password
-        // hash password
-        // save to auth database
-        // verification: email -> password: characters/symbols, email isn't stored in db
-        const password = req.body.password
-        const email = req.body.email
-        const saltRounds = 10 // store in env
+            const save = {
+                email,
+                userName
+            }
 
-        const hash = await bcrypt.hash(password, saltRounds)
+            await Auth.AuthModel.create({ email, password: hash })
+            const user = await User.UserModel.create(save);
+            const token = jwt.create(user)
 
-       const authUser = await Auth.AuthModel.create({email, password: hash})
+            // save to token to cookie for authenticated users ---> 
+            res.status(200).json({ user, token, success: true })
 
-        res.json(authUser)
-
-        } catch(err) {
+        } catch (err) {
             console.log(err)
-            res.status(404).send('Error Adding a User')
+            res.status(404).send(`Error Adding a User: ${err}`)
         }
 
 

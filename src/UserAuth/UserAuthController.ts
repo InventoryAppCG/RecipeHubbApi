@@ -20,18 +20,19 @@ module.exports = {
             const email = req.body.email
             const userName = req.body.username
             const saltRounds = process.env.SALT // store in env
-            // const hash = await bcrypt.hash(password, Number(saltRounds))
+            const hash = await bcrypt.hash(password, Number(saltRounds))
 
             const save = {
                 email,
                 userName
             }
 
-            // await Auth.AuthModel.create({ email, password: hash })
+            await Auth.AuthModel.create({ email, password: hash })
             const user = await User.UserModel.create(save);
+            const token = jwt.create(user)
 
             // save to token to cookie for authenticated users ---> 
-            res.status(200).json({ user, success: true })
+            res.status(200).json({ user, token, success: true })
 
         } catch (err) {
             console.log(err)
@@ -54,18 +55,15 @@ module.exports = {
     },
     async login(req, res) {
         try {
-            // search for email provided
             const authUser = await Auth.AuthModel.findOne({email: req.body.email})
 
-            // compare provided password with stored password
-            const userExists =  await bcrypt.compare(req.body.password, authUser.password)
+            // validation if the user doesn't throw error
+          const userExists =  await  bcrypt.compare(req.body.password, authUser.password)
 
-            if(!userExists) {
-                throw new Error('Unable to login, Invalid Credentials.')
-            }
-
-            const token = jwt.create(authUser)
-            res.json({message: "Login Succeessful", status: true, token })
+           if(!userExists) {
+               throw new Error('Unable to login')
+        }
+            res.json({message: "Login Succeessfull", status: true})
 
         } catch(err) {
             console.log(err)

@@ -30,7 +30,6 @@ module.exports = {
             await Auth.AuthModel.create({ email, password: hash })
             const user = await User.UserModel.create(save);
 
-            // save to token to cookie for authenticated users ---> 
             res.status(200).json({ user, success: true })
 
         } catch (err) {

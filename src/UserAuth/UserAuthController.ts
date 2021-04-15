@@ -50,7 +50,7 @@ module.exports = {
 
         } catch(err) {
             console.log(err)
-            res.status(404).send('Error Showing auth user')
+            res.status(404).send('Error Showing auth user:', err)
         }
     },
     async login(req, res) {

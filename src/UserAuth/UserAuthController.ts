@@ -57,7 +57,7 @@ module.exports = {
 
           // compare provided password with stored password
           const userExists =  await bcrypt.compare(req.body.password, authUser.password)
-          const token = jwt.create(authUser)
+          const token = await jwt.create(authUser)
 
            if(!userExists) {
                throw new Error('Unable to login')

@@ -20,14 +20,14 @@ module.exports = {
             const email = req.body.email
             const userName = req.body.username
             const saltRounds = process.env.SALT // store in env
-            const hash = await bcrypt.hash(password, Number(saltRounds))
+            // const hash = await bcrypt.hash(password, Number(saltRounds))
 
             const save = {
                 email,
                 userName
             }
 
-            await Auth.AuthModel.create({ email, password: hash })
+            // await Auth.AuthModel.create({ email, password: hash })
             const user = await User.UserModel.create(save);
 
             // save to token to cookie for authenticated users ---> 

@@ -29,7 +29,7 @@ module.exports = {
 
             await Auth.AuthModel.create({ email, password: hash })
             const user = await User.UserModel.create(save);
-            const token = jwt.create(user)
+            const token = await jwt.create(user)
 
             // save to token to cookie for authenticated users ---> 
             res.status(200).json({ user, token, success: true })
@@ -45,7 +45,7 @@ module.exports = {
 
     async read(req,res) {
         try {
-        const authUser = Auth.AuthModel.find({})
+        const authUser = await Auth.AuthModel.find({})
         res.json(authUser)
 
         } catch(err) {

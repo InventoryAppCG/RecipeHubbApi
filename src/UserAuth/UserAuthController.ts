@@ -29,7 +29,11 @@ module.exports = {
 
             await Auth.AuthModel.create({ email, password: hash })
             const user = await User.UserModel.create(save);
+<<<<<<< HEAD
             const token = await jwt.create(user)
+=======
+            const token = jwt.create(user)
+>>>>>>> parent of 79a5b0d (minor style changes to auth user)
 
             // save to token to cookie for authenticated users ---> 
             res.status(200).json({ user, token, success: true })

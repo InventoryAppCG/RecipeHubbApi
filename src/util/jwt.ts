@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken')
 const tokenExpiration = '1y'
 
 export = {
-  create: function (user) {
+    create: function (user) {
     return jwt.sign(
       this.claims(user),
       this.secret(),

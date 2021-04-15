@@ -29,18 +29,9 @@ module.exports = {
 
             await Auth.AuthModel.create({ email, password: hash })
             const user = await User.UserModel.create(save);
-<<<<<<< HEAD
-<<<<<<< HEAD
-            const token = await jwt.create(user)
-=======
-            const token = jwt.create(user)
->>>>>>> parent of 79a5b0d (minor style changes to auth user)
-=======
-            const token = jwt.create(user)
->>>>>>> parent of 79a5b0d (minor style changes to auth user)
 
             // save to token to cookie for authenticated users ---> 
-            res.status(200).json({ user, token, success: true })
+            res.status(200).json({ user, success: true })
 
         } catch (err) {
             console.log(err)
@@ -64,13 +55,14 @@ module.exports = {
         try {
             const authUser = await Auth.AuthModel.findOne({email: req.body.email})
 
-            // validation if the user doesn't throw error
-          const userExists =  await  bcrypt.compare(req.body.password, authUser.password)
+          // compare provided password with stored password
+          const userExists =  await bcrypt.compare(req.body.password, authUser.password)
+          const token = jwt.create(authUser)
 
            if(!userExists) {
                throw new Error('Unable to login')
         }
-            res.json({message: "Login Succeessfull", status: true})
+        res.json({message: "Login Succeessful", status: true, token })
 
         } catch(err) {
             console.log(err)

@@ -14,7 +14,13 @@ const mongoose = require('mongoose')
 // Middleware
 app.use(express.json())
 app.use(bodyParser.json())
-app.use(cors())
+
+// Only this website can hit our api
+app.use(cors({
+  origin:['https://recipehubbapi.herokuapp.com/'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE']
+}))
+
 
 mongoose.connect(
   process.env.MONGO_API_KEY,

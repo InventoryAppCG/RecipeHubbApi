@@ -1,9 +1,9 @@
 import { CLIENT_RENEG_LIMIT } from "node:tls";
 
 export { }
-const Auth = require('../schema/auth.ts')
+const Auth = require('../models/auth.ts')
 const bcrypt = require('bcrypt')
-const User = require('../schema/userSchema');
+const User = require('../models/userSchema');
 const jwt = require('../util/jwt.ts')
 
 

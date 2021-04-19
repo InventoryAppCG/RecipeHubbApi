@@ -2,17 +2,12 @@ import { model, Schema, Model,  Document } from 'mongoose';
 import {ObjectId} from 'mongodb'
 
 interface CommentsModel extends Document {
-    author: ObjectId
     ownerId: ObjectId,
     rating: Number,
     body: String
 }
 
 const CommentsSchema: Schema = new Schema({
-        author: {
-            type: ObjectId,
-            default: null
-        },
         ownerId: {
             type: ObjectId,
             default: null

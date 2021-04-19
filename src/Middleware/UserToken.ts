@@ -1,12 +1,11 @@
 const jwt = require('../util/jwt.ts')
-const UserMid = (req,res, next) => {
-    const claims = jwt.valid(req.token)
-
-    if(!claims) {
-    res.send('Invalid Token')
-}
-    req.user = claims
-
+const User = require('../models/userSchema');
+const UserMid = async (req, res, next) => {
+    const claims = jwt.valid(req.headers.token)
+    if (!claims) {
+        throw Error('Invalid Token')
+    }
+        req.user = await User.UserModel.find({"email": claims.email})
     return next()
 }
 

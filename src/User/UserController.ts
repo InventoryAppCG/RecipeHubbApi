@@ -22,6 +22,22 @@ module.exports = {
 
     }
   },
+  async data(req, res) {
+    try {
+      const user = {
+        userName: req.user[0].userName,
+        firstName: req.user[0].firstName,
+        lastName: req.user[0].lastName,
+        email: req.user[0].email,
+        profilePic: req.user[0].profilePic,
+        numRecipes: req.user[0].numRecipes,
+      }
+      res.json(user)
+    } catch (err) {
+      res.status(404).send(err)
+
+    }
+  },
   async update(req, res) {
     try {
        await User.UserModel.updateOne({email: req.params.email}, req.body)

@@ -2,7 +2,6 @@ import { model, Schema, Model,  Document } from 'mongoose';
 import {ObjectId, Timestamp} from 'mongodb'
 
 interface RecipeModel extends Document {
-    author: ObjectId
     toolsNeeded: Object
     ownerId: ObjectId,
     ingridients: [Object],
@@ -17,10 +16,6 @@ interface RecipeModel extends Document {
 }
 
 const RecipeSchema: Schema = new Schema({
-        author:{
-            type: ObjectId,
-            require: true
-        }, 
         toolsNeeded: {
             type: Object,
             default: {}
@@ -30,8 +25,8 @@ const RecipeSchema: Schema = new Schema({
             default: {}
         },
         ingridients: {
-            type: String,
-            default: null
+            type: Array,
+            default: []
         },
         instructions: {
             type: String,

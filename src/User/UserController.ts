@@ -5,7 +5,6 @@ const User = require('../models/userSchema');
 module.exports = {
   async create(req, res) {
     try {
-      console.log('create')
       const user = await User.UserModel.create(req.body);
       res.send(user, 'Successfully added a user')
     } catch (err) {

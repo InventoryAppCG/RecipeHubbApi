@@ -11,7 +11,6 @@ const jwt = require('../util/jwt.ts')
 module.exports = {
     async create(req, res) {
         try {
-            console.log('here!')
             // jwt token (userEmail, userPassword)
             // take user password
             // hash password

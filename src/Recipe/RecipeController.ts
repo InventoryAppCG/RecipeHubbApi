@@ -1,6 +1,6 @@
 
 
-const Recipe = require('../schema/recipeSchema');
+const Recipe = require('../models/recipeSchema');
 
 module.exports = {
   async create(req, res) {

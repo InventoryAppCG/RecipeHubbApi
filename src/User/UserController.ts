@@ -1,6 +1,6 @@
 
 
-const User = require('../schema/userSchema');
+const User = require('../models/userSchema');
 
 module.exports = {
   async create(req, res) {

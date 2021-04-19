@@ -14,7 +14,20 @@ const mongoose = require('mongoose')
 // Middleware
 app.use(express.json())
 app.use(bodyParser.json())
-app.use(cors())
+
+// Only this website can hit our api
+const whitelist = ['http://localhost:8080','https://recipehubbapi.herokuapp.com']
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
+app.use(cors(corsOptions))
+
 
 mongoose.connect(
   process.env.MONGO_API_KEY,

@@ -61,7 +61,7 @@ module.exports = {
            if(!userExists) {
                throw new Error('Unable to login')
         }
-        res.json({message: "Login Succeessful", status: true, token })
+        res.json({message: "Login Succeessful", success: true, token })
 
         } catch(err) {
             console.log(err)

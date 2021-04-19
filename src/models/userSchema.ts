@@ -1,8 +1,6 @@
 import { model, Schema, Model,  Document } from 'mongoose';
-import {ObjectId} from 'mongodb'
 
 interface UserModel extends Document {
-    author: ObjectId
     userName: String
     firstName: String,
     lastName: String,
@@ -12,10 +10,6 @@ interface UserModel extends Document {
 }
 
 const UserSchema: Schema = new Schema({
-        author:{
-            type: ObjectId,
-            require: true
-        }, 
         userName: {
             type: String,
             default: null

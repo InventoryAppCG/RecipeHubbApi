@@ -19,7 +19,6 @@ app.use(bodyParser.json())
 const whitelist = ['http://localhost:8080','https://recipehubbapi.herokuapp.com']
 const corsOptions = {
   origin: function (origin, callback) {
-    console.log(origin)
     if (whitelist.indexOf(origin) !== -1 || !origin) {
       callback(null, true)
     } else {

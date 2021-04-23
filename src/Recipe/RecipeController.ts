@@ -5,11 +5,13 @@ const Recipe = require('../models/recipeSchema');
 module.exports = {
   async create(req, res) {
     try {
+      console.log(req.body)
+      console.log(req.user)
       const recipe = await Recipe.RecipeModel.create(req.body);
-      res.send(recipe, 'Successfully added a user')
+      res.json(recipe)
     } catch (err) {
-      res.status(err)
-
+      console.log(err)
+      // res.status(404).send(err)
     }
   },
   async read(req, res) {

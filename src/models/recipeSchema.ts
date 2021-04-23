@@ -2,31 +2,31 @@ import { model, Schema, Model,  Document } from 'mongoose';
 import {ObjectId, Timestamp} from 'mongodb'
 
 interface RecipeModel extends Document {
-    toolsNeeded: Object
+    name: String,
     ownerId: ObjectId,
-    ingridients: [Object],
+    ingredients: String,
     instructions: String,
     recipeImage: String,
     servingSize: String,
-    type: Number,
-    category: [String],
+    type: String,
+    categories: [String],
     favorite: Number,
     dateCreated: Timestamp,
     isPublic: Boolean
 }
 
 const RecipeSchema: Schema = new Schema({
-        toolsNeeded: {
-            type: Object,
-            default: {}
+        name: {
+            type: String,
+            default: null
         },
         ownerId: {
             type: ObjectId,
-            default: {}
+            default: null
         },
-        ingridients: {
-            type: Array,
-            default: []
+        ingredients: {
+            type: String,
+            default: null
         },
         instructions: {
             type: String,
@@ -41,10 +41,10 @@ const RecipeSchema: Schema = new Schema({
             default: null
         },
         type: {
-            type: Number,
-            default: 0
+            type: String,
+            default: null
         },
-        category: {
+        categories: {
             type: Array,
             default: []
         },
@@ -59,14 +59,13 @@ const RecipeSchema: Schema = new Schema({
         isPublic: {
             type: Boolean,
             default: false
-        }
-       
+        } 
 });
 
 
 
 // exporting user model
-export const UserModel = model<RecipeModel>('Recipes', RecipeSchema);
+export const RecipeModel = model<RecipeModel>('Recipes', RecipeSchema);
 
 // exporting interface / querying
 export interface IUserModel extends Model<RecipeModel> {

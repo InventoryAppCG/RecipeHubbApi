@@ -6,10 +6,10 @@ module.exports = {
   async create(req, res) {
     try {
       const recipe = await Recipe.RecipeModel.create(req.body);
-      res.send(recipe, 'Successfully added a user')
+      res.json(recipe)
     } catch (err) {
-      res.status(err)
-
+      console.log(err)
+      // res.status(404).send(err)
     }
   },
   async read(req, res) {

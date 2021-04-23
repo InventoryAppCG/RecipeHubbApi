@@ -16,7 +16,7 @@ app.use(express.json())
 app.use(bodyParser.json())
 
 // Only this website can hit our api
-const whitelist = ['http://localhost:8080','http://localhost:8081', 'https://recipehubbapi.herokuapp.com', 'https://recipe-hubb-client.vercel.app']
+const whitelist = ['http://localhost:8080','http://localhost:8081', 'https://recipehubbapi.herokuapp.com', 'https://recipe-hubb-client.vercel.app', 'https://recipehubbapi.herokuapp.com/']
 const corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1 || !origin) {

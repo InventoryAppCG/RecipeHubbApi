@@ -6,7 +6,9 @@ interface UserModel extends Document {
     lastName: String,
     email: String,
     profilePic: String,
-    numRecipes: Number
+    numRecipes: Number,
+    city: String,
+    bio: String,
 }
 
 const UserSchema: Schema = new Schema({
@@ -19,6 +21,14 @@ const UserSchema: Schema = new Schema({
             default: null
         },
         lastName: {
+            type: String,
+            default: null
+        },
+        city: {
+            type: String,
+            default: null
+        },
+        bio: {
             type: String,
             default: null
         },

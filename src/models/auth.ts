@@ -1,5 +1,5 @@
-import { model, Schema, Model,  Document } from 'mongoose';
-import {ObjectId} from 'mongodb'
+import { model, Schema, Model, Document } from 'mongoose';
+import { ObjectId } from 'mongodb'
 
 interface AuthModel extends Document {
     email: String,
@@ -7,14 +7,18 @@ interface AuthModel extends Document {
 }
 
 const AuthSchema: Schema = new Schema({
-        email: {
-            type: String,
-            default: null
-        },
-        password: {
-            type: String,
-            default: null
-        },
+    userName: {
+        type: String,
+        default: null
+    },
+    email: {
+        type: String,
+        default: null
+    },
+    password: {
+        type: String,
+        default: null
+    },
 });
 
 

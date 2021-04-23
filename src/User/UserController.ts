@@ -31,6 +31,8 @@ module.exports = {
         email: req.user[0].email,
         profilePic: req.user[0].profilePic,
         numRecipes: req.user[0].numRecipes,
+        bio: req.user[0].bio,
+        city: req.user[0].city
       }
       res.json(user)
     } catch (err) {

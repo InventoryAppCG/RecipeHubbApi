@@ -56,7 +56,7 @@ const RecipeSchema: Schema = new Schema({
             type: Date,
             default: Date.now()
         },
-        isPublic: {
+        public: {
             type: Boolean,
             default: false
         } 

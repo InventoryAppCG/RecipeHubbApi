@@ -5,7 +5,9 @@ const UserMid = async (req, res, next) => {
     if (!claims) {
         throw Error('Invalid Token')
     }
-        req.user = await User.UserModel.find({"email": claims.email})
+    
+    req.user = await User.UserModel.find({ "email": claims.email })
+
     return next()
 }
 

@@ -7,10 +7,10 @@ module.exports = {
     try {
       const recipeAgg = {...req.body, ownerId: req.user[0].id}
       const recipe = await Recipe.RecipeModel.create(recipeAgg);
-      res.json(recipe)
+      res.json(recipe, {success: true})
     } catch (err) {
       console.log(err)
-      // res.status(404).send(err)
+      res.status(404).send(err)
     }
   },
   async read(req, res) {

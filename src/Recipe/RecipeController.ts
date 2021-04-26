@@ -14,7 +14,6 @@ module.exports = {
     }
   },
   async read(req, res) {
-
     try {
       const recipe = await Recipe.RecipeModel.find({});
       res.json(recipe)

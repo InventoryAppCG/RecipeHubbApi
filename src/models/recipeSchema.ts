@@ -12,7 +12,7 @@ interface RecipeModel extends Document {
     tags: [String],
     favorited: Number,
     dateCreated: Timestamp,
-    isPublic: Boolean
+    public: Boolean
 }
 
 const RecipeSchema: Schema = new Schema({

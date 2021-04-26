@@ -8,9 +8,10 @@ module.exports = {
       const recipeAgg = {...req.body, ownerId: req.user[0].id}
       const recipe = await Recipe.RecipeModel.create(recipeAgg);
       res.status(200).json(recipe)
+
     } catch (err) {
       console.log(err)
-      // res.status(404).send(err)
+      res.status(404).send(err)
     }
   },
   async read(req, res) {

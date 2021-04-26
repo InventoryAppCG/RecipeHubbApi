@@ -10,7 +10,7 @@ interface RecipeModel extends Document {
     servingSize: Number,
     soEasyRating: Number,
     tags: [String],
-    favorited: Number,
+    favorited: Boolean,
     dateCreated: Timestamp,
     public: Boolean
 }
@@ -49,8 +49,8 @@ const RecipeSchema: Schema = new Schema({
             default: []
         },
         favorited: {
-            type: Number,
-            default: 0
+            type: Boolean,
+            default: false
         },
         dateCreated: {
             type: Date,

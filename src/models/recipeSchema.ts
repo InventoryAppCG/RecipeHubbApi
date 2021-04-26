@@ -7,12 +7,12 @@ interface RecipeModel extends Document {
     ingredients: [String],
     instructions: String,
     recipeImage: String,
-    servingSize: String,
-    type: String,
-    categories: [String],
-    favorite: Number,
+    servingSize: Number,
+    soEasyRating: Number,
+    tags: [String],
+    favorited: Number,
     dateCreated: Timestamp,
-    isPublic: Boolean
+    public: Boolean
 }
 
 const RecipeSchema: Schema = new Schema({
@@ -37,18 +37,18 @@ const RecipeSchema: Schema = new Schema({
             default: null
         },
         servingSize: {
-            type: String,
+            type: Number,
             default: null
         },
-        type: {
-            type: String,
+        soEasyRating: {
+            type: Number,
             default: null
         },
-        categories: {
+        tags: {
             type: Array,
             default: []
         },
-        favorite: {
+        favorited: {
             type: Number,
             default: 0
         },

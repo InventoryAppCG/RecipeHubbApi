@@ -7,14 +7,14 @@ module.exports = {
     try {
       const recipeAgg = {...req.body, ownerId: req.user[0].id}
       const recipe = await Recipe.RecipeModel.create(recipeAgg);
-      res.json(recipe, {success: true})
+      res.status(200).json(recipe)
+
     } catch (err) {
       console.log(err)
       res.status(404).send(err)
     }
   },
   async read(req, res) {
-
     try {
       const recipe = await Recipe.RecipeModel.find({});
       res.json(recipe)

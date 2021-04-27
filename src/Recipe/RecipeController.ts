@@ -35,15 +35,15 @@ module.exports = {
     console.log(req.body)
     try {
        await Recipe.RecipeModel.updateOne({_id: req.params.id}, req.body)
-      res.send(`Successfully updated ${req.params.id}`)
+      res.status(200).send(`Successfully updated ${req.params.id}`)
     } catch (err) {
       res.status(404).send('Err Updating')
     }
   },
   async delete(req, res) {
     try {
-       await Recipe.RecipeModel.deleteOne({id: req.params.id}, req.body)
-      res.send(`Successfully deleted ${req.params.id}`)
+       await Recipe.RecipeModel.deleteOne({_id: req.params.id})
+      res.status(200).send(`Successfully deleted ${req.params.id}`)
     } catch (err) {
       res.status(404).send('Err Deleting')
     }

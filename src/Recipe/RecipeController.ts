@@ -67,7 +67,8 @@ module.exports = {
         req.body = { ...req.body, recipeImage: s3Image.Location }
       }
       await Recipe.RecipeModel.updateOne({ _id: req.params.id }, req.body)
-      res.send(`Successfully updated ${req.params.id}`)
+      res.status(200).send(`Successfully updated ${req.params.id}`)
+
     } catch (err) {
       res.status(404).send('Err Updating')
     }
@@ -75,7 +76,7 @@ module.exports = {
   async delete(req, res) {
     try {
       await Recipe.RecipeModel.deleteOne({ id: req.params.id }, req.body)
-      res.send(`Successfully deleted ${req.params.id}`)
+      res.status(200).send(`Successfully deleted ${req.params.id}`)
     } catch (err) {
       res.status(404).send('Err Deleting')
     }

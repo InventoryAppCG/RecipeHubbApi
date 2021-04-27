@@ -1,5 +1,13 @@
 const AWS = require('aws-sdk');
-AWS.config.loadFromPath('./s3_config.json');
+const AWSconfig = {
+  "accessKeyId":process.env.accessKeyId,
+  "secretAccessKey":process.env.secretAccessKey,
+  "region":process.env.region,
+  "signatureVersion": process.env.signatureVersion
+
+}
+AWS.config(AWSconfig)
+
 const s3Bucket = new AWS.S3({ params: { Bucket: 'recipehubb' } });
 
 

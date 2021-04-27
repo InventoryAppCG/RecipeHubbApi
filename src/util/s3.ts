@@ -1,21 +1,18 @@
 const AWS = require('aws-sdk');
-const AWSconfig = {
+const s3Bucket = new AWS.S3({
   "accessKeyId":process.env.accessKeyId,
-  "secretAccessKey":process.env.secretAccessKey,
-  "region":process.env.region,
-  "signatureVersion": process.env.signatureVersion
+    "secretAccessKey":process.env.secretAccessKey,
+    "region":process.env.region,
+    "signatureVersion": process.env.signatureVersion,
+    Bucket: process.env.bucket
+});
 
-}
-AWS.config(AWSconfig)
-
-const s3Bucket = new AWS.S3({ params: { Bucket: 'recipehubb' } });
 
 
 module.exports = {
   uploadfile: async (file, filename) => {
-
     const params = {
-      Bucket: 'recipehubb',
+      Bucket: process.env.bucket,
       Key: 'assets' + '/' + filename + ".jpg",
       ACL: 'public-read',
       ContentEncoding: 'base64,',

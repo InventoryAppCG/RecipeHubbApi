@@ -46,6 +46,17 @@ module.exports = {
   },
   async update(req, res) {
     try {
+      const image = req.body.recipeImage || null
+      if (image) {
+        //JSON.parse image
+        const readImage = JSON.parse(image)
+        //remove spacees
+        const name = req.body.name.trim()
+        //update image and store  i.e : 10023424-chicken Sandwich
+        const s3Image = await s3.uploadfile(readImage, `${req.user[0].id}-${name}`)
+        //update recipeImage with s3 image
+        req.body = { ...req.body, recipeImage: s3Image.Location }
+      }
       await Recipe.RecipeModel.updateOne({ _id: req.params.id }, req.body)
       res.send(`Successfully updated ${req.params.id}`)
     } catch (err) {
@@ -60,4 +71,5 @@ module.exports = {
       res.status(404).send('Err Deleting')
     }
   },
+
 }

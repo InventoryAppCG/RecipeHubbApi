@@ -16,16 +16,25 @@ module.exports = {
   },
   async read(req, res) {
     try {
-      const recipe = await Recipe.RecipeModel.find({});
-      res.json(recipe)
+      const recipes = await Recipe.RecipeModel.find({});
+      res.status(200).json(recipes)
     } catch (err) {
       res.status(404).send(err)
 
     }
   },
-  async update(req, res) {
+  async readOne(req, res) {
     try {
-       await Recipe.RecipeModel.updateOne({id: req.params.id}, req.body)
+      const recipe = await Recipe.RecipeModel.findOne({_id: req.params.id});
+      res.status(200).json(recipe)
+    } catch (err) {
+      res.status(404).send(err)
+    }
+  },
+  async update(req, res) {
+    console.log(req.body)
+    try {
+       await Recipe.RecipeModel.updateOne({_id: req.params.id}, req.body)
       res.send(`Successfully updated ${req.params.id}`)
     } catch (err) {
       res.status(404).send('Err Updating')

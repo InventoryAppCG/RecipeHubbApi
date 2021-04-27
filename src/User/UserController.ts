@@ -25,7 +25,7 @@ module.exports = {
   async data(req, res) {
     try {
       const user = {
-        userName: req.user[0].userName,
+        userName: req.user[0].fuserName,
         firstName: req.user[0].firstName,
         lastName: req.user[0].lastName,
         email: req.user[0].email,

@@ -36,6 +36,15 @@ module.exports = {
 
     }
   },
+    async getRecipesById(req, res) {
+      try {
+        const recipes = await Recipe.RecipeModel.find({_id: req.user[0].id});
+        res.status(200).json(recipes)
+      } catch (err) {
+        res.status(404).send(err)
+  
+      }
+  },
   async readOne(req, res) {
     try {
       const recipe = await Recipe.RecipeModel.findOne({ _id: req.params.id });

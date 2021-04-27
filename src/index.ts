@@ -12,8 +12,8 @@ const mongoose = require('mongoose')
 
 
 // Middleware
-app.use(express.json())
-app.use(bodyParser.json())
+app.use(bodyParser.json({limit: '10mb', extended: true}))
+app.use(bodyParser.urlencoded({limit: '10mb', extended: true}))
 
 // Only this website can hit our api
 const whitelist = ['http://localhost:8080','http://localhost:8081', 'https://recipehubbapi.herokuapp.com', 'https://recipe-hubb-client.vercel.app', 'https://recipe-hubb-client-graciasclaude.vercel.app']

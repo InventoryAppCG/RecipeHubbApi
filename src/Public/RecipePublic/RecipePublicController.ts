@@ -16,17 +16,17 @@ module.exports = {
             // grab userId
             const user = req.body.query.userName ? await UserPublic.UserModel.findOne({ userName: req.body.query.userName }) : null
             // agg is either req.body or added userId
-            let agg = req.body.query
+            let query = req.body.query
             if(user) {
                 //remove userName
                 const {userName, ...rest} = req.body.query
                 //update ..rest with ownerId
-                agg = {...rest, ownerId: user._id }
+                query = {...rest, ownerId: user._id }
             }
             // query gets passed in by frontend returns recipes    
 
-            const recipes = await RecipePublic.RecipeModel.find(agg)
-            
+            const recipes = await RecipePublic.RecipeModel.find(query)
+
             res.status(200).json(recipes)
         } catch (err) {
             console.log(err)

@@ -1,6 +1,7 @@
 
 
-const User = require('../models/userSchema');
+const User = require('../models/userSchema')
+const awss3 = require('../util/s3')
 
 module.exports = {
   async create(req, res) {
@@ -25,7 +26,7 @@ module.exports = {
   async data(req, res) {
     try {
       const user = {
-        userName: req.user[0].fuserName,
+        userName: req.user[0].userName,
         firstName: req.user[0].firstName,
         lastName: req.user[0].lastName,
         email: req.user[0].email,
@@ -42,9 +43,25 @@ module.exports = {
   },
   async update(req, res) {
     try {
-       await User.UserModel.updateOne({email: req.params.email}, req.body)
-      res.send(`Successfully updated ${req.params.email}`)
+      //  update AWS image for image
+      const image = req.body.profilePic || null
+      let userAgg = {...req.body}
+
+      if (image == null) {
+        //JSON.parse image
+        const readImage = JSON.parse(image)
+        //remove spacees
+        const name = (req.body.userName).trim()
+        //update image and store  i.e : 10023424-chicken Sandwich
+        const s3Image = await awss3.uploadfile(readImage, `${req.user[0].id}-${name}`)
+        //update recipeImage with s3 image
+        userAgg = { ...req.body, profilePic: s3Image.Location }
+      }
+
+       await User.UserModel.updateOne({email: req.params.email}, userAgg)
+      res.status(200).json(userAgg)
     } catch (err) {
+      console.log(err)
       res.status(404).send('Err Updating')
     }
   },

@@ -45,7 +45,7 @@ app.get('/', (req,res) => {
 
 
 app.listen(port, () => {
-  console.log(`Recipe Chicken Heart Beets http://localhost:${port}`)
+  console.log(`Server running locally at http://localhost:${port}`)
 });
 
 app = routes.register(app)

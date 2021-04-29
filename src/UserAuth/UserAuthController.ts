@@ -68,5 +68,41 @@ module.exports = {
             console.log(err)
             res.status(404).send('Unable to login')
         }
+    },
+
+    async update(req, res) {
+        try {
+            
+            // see if new username is being used
+            const userNameBeingUsed = await Auth.AuthModel.findOne({userName: req.body.newUserName})
+
+            // if username not being used, update the current auth user
+            if (!userNameBeingUsed){
+                const updatedUser = await Auth.AuthModel.updateOne(
+                    {userName : req.body.oldUserName}, 
+                    {
+                        userName: req.body.newUserName,
+                        email: req.body.newEmail
+                    }
+                )
+                return res.status(200).json(updatedUser)
+            }
+            // else, update new email
+            else if (req.body.oldUserName === req.body.newUserName){
+                const updatedUser = await Auth.AuthModel.updateOne(
+                    { email : req.body.oldEmail}, 
+                    {
+                        userName: req.body.newUserName,
+                        email: req.body.newEmail
+                    }
+                )
+                return res.status(200).json(updatedUser)
+            }
+            // else return res.status(404).send('username already used')
+
+        } catch (err) {
+            console.log(err)
+            return res.status(404).send('username already used')
+        }
     }
 }

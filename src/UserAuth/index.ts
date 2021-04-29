@@ -5,6 +5,7 @@ const controller = require('./UserAuthController')
 
 route.post('/', controller.create )
 route.post('/login', controller.login )
+route.put('/', controller.update)
 route.get('/', controller.read)
 // route.post('/',controller.create)
 

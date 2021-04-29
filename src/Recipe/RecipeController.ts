@@ -70,6 +70,7 @@ module.exports = {
       res.status(200).send(`Successfully updated ${req.params.id}`)
 
     } catch (err) {
+      console.log(err)
       res.status(404).send('Err Updating')
     }
   },

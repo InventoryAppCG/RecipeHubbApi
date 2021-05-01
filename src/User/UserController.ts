@@ -1,12 +1,12 @@
 
 
-const User = require('../models/userSchema')
+const {  UserModel} = require('../models/userSchema')
 const awss3 = require('../util/s3')
 
 module.exports = {
   async create(req, res) {
     try {
-      const user = await User.UserModel.create(req.body);
+      const user = await UserModel.create(req.body);
       res.send(user, 'Successfully added a user')
     } catch (err) {
       res.status(err)
@@ -16,7 +16,7 @@ module.exports = {
   async read(req, res) {
 
     try {
-      const user = await User.UserModel.find({});
+      const user = await UserModel.find({});
       res.json(user)
     } catch (err) {
       res.status(404).send(err)
@@ -26,14 +26,14 @@ module.exports = {
   async data(req, res) {
     try {
       const user = {
-        userName: req.user[0].userName,
-        firstName: req.user[0].firstName,
-        lastName: req.user[0].lastName,
-        email: req.user[0].email,
-        profilePic: req.user[0].profilePic,
-        numRecipes: req.user[0].numRecipes,
-        bio: req.user[0].bio,
-        city: req.user[0].city
+        userName: req.user.userName,
+        firstName: req.user.firstName,
+        lastName: req.user.lastName,
+        email: req.user.email,
+        profilePic: req.user.profilePic,
+        numRecipes: req.user.numRecipes,
+        bio: req.user.bio,
+        city: req.user.city
       }
       res.json(user)
     } catch (err) {
@@ -53,12 +53,12 @@ module.exports = {
         //remove spacees
         const name = (req.body.userName).trim()
         //update image and store  i.e : 10023424-chicken Sandwich
-        const s3Image = await awss3.uploadfile(readImage, `${req.user[0].id}-${name}`)
+        const s3Image = await awss3.uploadfile(readImage, `${req.user.id}-${name}`)
         //update recipeImage with s3 image
         userAgg = { ...req.body, profilePic: s3Image.Location }
       }
 
-       await User.UserModel.updateOne({email: req.params.email}, userAgg)
+       await UserModel.updateOne({email: req.params.email}, userAgg)
       res.status(200).json(userAgg)
     } catch (err) {
       console.log(err)
@@ -67,7 +67,7 @@ module.exports = {
   },
   async delete(req, res) {
     try {
-       await User.UserModel.deleteOne({email: req.params.email}, req.body)
+       await UserModel.deleteOne({email: req.params.email}, req.body)
       res.send(`Successfully deleted ${req.params.email}`)
     } catch (err) {
       res.status(404).send('Err Deleting')

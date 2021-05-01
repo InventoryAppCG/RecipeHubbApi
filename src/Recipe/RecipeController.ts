@@ -1,12 +1,12 @@
 
 
-const Recipe = require('../models/recipeSchema');
+const { RecipeModel } = require('../models/recipeSchema');
 const s3 = require('../util/s3')
 
 module.exports = {
   async create(req, res) {
     try {
-      let recipeAgg = { ...req.body, ownerId: req.user[0].id }
+      let recipeAgg = { ...req.body, ownerId: req.user.id }
       const image = req.body.recipeImage || null
 
       if (image) {
@@ -15,11 +15,11 @@ module.exports = {
         //remove spacees
         const name = req.body.name.trim()
         //update image and store  i.e : 10023424-chicken Sandwich
-        const s3Image = await s3.uploadfile(readImage, `${req.user[0].id}-${name}`)
+        const s3Image = await s3.uploadfile(readImage, `${req.user.id}-${name}`)
         //update recipeImage with s3 image
         recipeAgg = { ...recipeAgg, recipeImage: s3Image.Location }
       }
-      const recipe = await Recipe.RecipeModel.create(recipeAgg);
+      const recipe = await RecipeModel.create(recipeAgg);
       res.status(200).json(recipe)
 
     } catch (err) {
@@ -30,7 +30,7 @@ module.exports = {
   // All Recipes
   async read(req, res) {
     try {
-      const recipes = await Recipe.RecipeModel.find({});
+      const recipes = await RecipeModel.find({});
       res.status(200).json(recipes)
     } catch (err) {
       res.status(404).send(err)
@@ -39,7 +39,11 @@ module.exports = {
   // All Recipes of current user
   async getRecipesByUserId(req, res) {
       try {
+<<<<<<< HEAD
+        const recipes = await RecipeModel.find({_id: req.user.id});
+=======
         const recipes = await Recipe.RecipeModel.find({ownerId: req.user[0].id});
+>>>>>>> main
         res.status(200).json(recipes)
       } catch (err) {
         res.status(404).send(err)
@@ -47,7 +51,7 @@ module.exports = {
   },
   async readOne(req, res) {
     try {
-      const recipe = await Recipe.RecipeModel.findOne({ _id: req.params.id });
+      const recipe = await RecipeModel.findOne({ _id: req.params.id });
       res.status(200).json(recipe)
     } catch (err) {
       res.status(404).send(err)
@@ -62,11 +66,11 @@ module.exports = {
         //remove spacees
         const name = req.body.name.trim()
         //update image and store  i.e : 10023424-chicken Sandwich
-        const s3Image = await s3.uploadfile(readImage, `${req.user[0].id}-${name}`)
+        const s3Image = await s3.uploadfile(readImage, `${req.user.id}-${name}`)
         //update recipeImage with s3 image
         req.body = { ...req.body, recipeImage: s3Image.Location }
       }
-      await Recipe.RecipeModel.updateOne({ _id: req.params.id }, req.body)
+      await RecipeModel.updateOne({ _id: req.params.id }, req.body)
       res.status(200).send(`Successfully updated ${req.params.id}`)
 
     } catch (err) {
@@ -76,7 +80,11 @@ module.exports = {
   },
   async delete(req, res) {
     try {
+<<<<<<< HEAD
+      await RecipeModel.deleteOne({ id: req.params.id }, req.body)
+=======
       await Recipe.RecipeModel.deleteOne({ _id: req.params.id }, req.body)
+>>>>>>> main
       res.status(200).send(`Successfully deleted ${req.params.id}`)
     } catch (err) {
       res.status(404).send('Err Deleting')

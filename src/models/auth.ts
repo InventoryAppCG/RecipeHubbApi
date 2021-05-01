@@ -1,7 +1,7 @@
 import { model, Schema, Model, Document } from 'mongoose';
-import { ObjectId } from 'mongodb'
 
 interface AuthModel extends Document {
+    userName:String,
     email: String,
     password: String
 }
@@ -19,7 +19,8 @@ const AuthSchema: Schema = new Schema({
         type: String,
         default: null
     },
-});
+    
+},{timestamps:true});
 
 
 

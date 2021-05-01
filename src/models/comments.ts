@@ -2,30 +2,26 @@ import { model, Schema, Model,  Document } from 'mongoose';
 import {ObjectId} from 'mongodb'
 
 interface CommentsModel extends Document {
-    ownerId: ObjectId,
-    rating: Number,
-    body: String
+    recipeId: ObjectId,
+    rating: [Object],
+    body: [Object]
 }
 
 const CommentsSchema: Schema = new Schema({
-        ownerId: {
+        recipeId: {
             type: ObjectId,
             default: null
         },
-        rating: {
-            type: Number,
-            default: 0
+        ratings: {
+            type: [Object],
+            default: []
         },
-        body: {
-            type: String,
-            default: null
-        }
-});
+    }, {timestamps: true}  );
 
 
 
 // exporting user model
-export const UserModel = model<CommentsModel>('Auth', CommentsSchema);
+export const CommentModel = model<CommentsModel>('Comments', CommentsSchema);
 
 // exporting interface / querying
 export interface IUserModel extends Model<CommentsModel> {

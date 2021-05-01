@@ -4,7 +4,7 @@ import {ObjectId, Timestamp} from 'mongodb'
 interface RecipeModel extends Document {
     name: String,
     ownerId: ObjectId,
-    ingredients: [String],
+    ingredients: [Object],
     instructions: String,
     recipeImage: String,
     servingSize: Number,
@@ -19,7 +19,7 @@ const RecipeSchema: Schema = new Schema({
         name: {
             type: String,
             default: null
-        },
+        }, 
         ownerId: {
             type: ObjectId,
             default: null
@@ -59,8 +59,8 @@ const RecipeSchema: Schema = new Schema({
         public: {
             type: Boolean,
             default: false
-        } 
-});
+        },
+},{timestamps: true});
 
 
 

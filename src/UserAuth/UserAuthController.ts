@@ -1,7 +1,5 @@
-import { model } from "mongoose";
-
 export { }
-const Auth = require('../models/auth.ts')
+const { AuthModel } = require('../models/auth.ts')
 const bcrypt = require('bcrypt')
 const User = require('../models/userSchema');
 const jwt = require('../util/jwt.ts')
@@ -10,7 +8,7 @@ const jwt = require('../util/jwt.ts')
 module.exports = {
     async create(req, res) {
         try {
-            const {password, email, userName, firstName, lastName, city, bio} = req.body
+            const { password, email, userName, firstName, lastName, city, bio } = req.body
             // take user password
             // hash password
             // save to auth database
@@ -26,7 +24,7 @@ module.exports = {
                 city
             }
 
-            await Auth.AuthModel.create({ userName, email, password: hash })
+            await AuthModel.create({ userName, email, password: hash })
             const user = await User.UserModel.create(save);
 
             res.status(200).json({ user, success: true })
@@ -42,7 +40,7 @@ module.exports = {
 
     async read(req, res) {
         try {
-            const authUser = await Auth.AuthModel.find({})
+            const authUser = await AuthModel.find({})
             res.json(authUser)
 
         } catch (err) {
@@ -53,7 +51,7 @@ module.exports = {
         try {
 
             // if they pass in either email or password
-            const authUser = await Auth.AuthModel.findOne(req.body.query)
+            const authUser = await AuthModel.findOne(req.body.query)
 
             // compare provided password with stored password
             const userExists = await bcrypt.compare(req.body.password, authUser.password)
@@ -72,14 +70,14 @@ module.exports = {
 
     async update(req, res) {
         try {
-            
+
             // see if new username is being used
-            const userNameBeingUsed = await Auth.AuthModel.findOne({userName: req.body.newUserName})
+            const userNameBeingUsed = await AuthModel.findOne({ userName: req.body.newUserName })
 
             // if username not being used, update the current auth user
-            if (!userNameBeingUsed){
-                const updatedUser = await Auth.AuthModel.updateOne(
-                    {userName : req.body.oldUserName}, 
+            if (!userNameBeingUsed) {
+                const updatedUser = await AuthModel.updateOne(
+                    { userName: req.body.oldUserName },
                     {
                         userName: req.body.newUserName,
                         email: req.body.newEmail
@@ -88,9 +86,9 @@ module.exports = {
                 return res.status(200).json(updatedUser)
             }
             // else, update new email
-            else if (req.body.oldUserName === req.body.newUserName){
-                const updatedUser = await Auth.AuthModel.updateOne(
-                    { email : req.body.oldEmail}, 
+            else if (req.body.oldUserName === req.body.newUserName) {
+                const updatedUser = await AuthModel.updateOne(
+                    { email: req.body.oldEmail },
                     {
                         userName: req.body.newUserName,
                         email: req.body.newEmail

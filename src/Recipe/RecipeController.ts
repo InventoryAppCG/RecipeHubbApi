@@ -27,22 +27,26 @@ module.exports = {
       res.status(404).send(err)
     }
   },
+  // All Recipes
   async read(req, res) {
     try {
       const recipes = await RecipeModel.find({});
       res.status(200).json(recipes)
     } catch (err) {
       res.status(404).send(err)
-
     }
   },
-    async getRecipesById(req, res) {
+  // All Recipes of current user
+  async getRecipesByUserId(req, res) {
       try {
+<<<<<<< HEAD
         const recipes = await RecipeModel.find({_id: req.user.id});
+=======
+        const recipes = await Recipe.RecipeModel.find({ownerId: req.user[0].id});
+>>>>>>> main
         res.status(200).json(recipes)
       } catch (err) {
         res.status(404).send(err)
-  
       }
   },
   async readOne(req, res) {
@@ -76,7 +80,11 @@ module.exports = {
   },
   async delete(req, res) {
     try {
+<<<<<<< HEAD
       await RecipeModel.deleteOne({ id: req.params.id }, req.body)
+=======
+      await Recipe.RecipeModel.deleteOne({ _id: req.params.id }, req.body)
+>>>>>>> main
       res.status(200).send(`Successfully deleted ${req.params.id}`)
     } catch (err) {
       res.status(404).send('Err Deleting')

@@ -10,6 +10,5 @@ module.exports = {
         app.use("/recipe/", require("./Recipe"));
         app.use('/user/', require('./User'));
         app.use("/comments/", require("./Comments"));
-        
     }
 }

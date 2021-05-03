@@ -48,7 +48,7 @@ module.exports = {
       const image = req.body.profilePic || null
       let userAgg = {...req.body}
 
-      if (image == null) {
+      if (image) {
         //JSON.parse image
         const readImage = JSON.parse(image)
         //remove spacees

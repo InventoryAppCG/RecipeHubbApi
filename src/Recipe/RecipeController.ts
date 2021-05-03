@@ -7,7 +7,7 @@ module.exports = {
   async create(req, res) {
     try {
       let recipeAgg = { ...req.body, ownerId: req.user.id }
-      const image = req.body.recipeImage || null
+      const image = req.body.recipeImage
 
       if (image) {
         //JSON.parse image
@@ -39,7 +39,7 @@ module.exports = {
   // All Recipes of current user
   async getRecipesByUserId(req, res) {
       try {
-        const recipes = await RecipeModel.find({_id: req.user.id});
+        const recipes = await RecipeModel.find({ownerId: req.user.id});
         res.status(200).json(recipes)
       } catch (err) {
         res.status(404).send(err)
@@ -56,6 +56,7 @@ module.exports = {
   async update(req, res) {
     try {
       const image = req.body.recipeImage || null
+      
       if (image) {
         //JSON.parse image
         const readImage = JSON.parse(image)

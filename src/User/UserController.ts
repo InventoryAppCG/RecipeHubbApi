@@ -33,7 +33,8 @@ module.exports = {
         profilePic: req.user.profilePic,
         numRecipes: req.user.numRecipes,
         bio: req.user.bio,
-        city: req.user.city
+        city: req.user.city,
+        id: req.user._id
       }
       res.json(user)
     } catch (err) {

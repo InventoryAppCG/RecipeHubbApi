@@ -6,7 +6,8 @@ const controller = require('./UserAuthController')
 route.post('/', controller.create )
 route.post('/login', controller.login )
 route.put('/', controller.update)
-route.get('/', controller.read)
+route.post('/find', controller.findUser)
+route.post('/reset', controller.reset)
 // route.post('/',controller.create)
 
 module.exports = route

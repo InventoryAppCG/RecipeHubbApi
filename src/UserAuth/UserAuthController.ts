@@ -1,7 +1,7 @@
 export { }
 const { AuthModel } = require('../models/auth.ts')
 const bcrypt = require('bcrypt')
-const User = require('../models/userSchema');
+const {UserModel} = require('../models/userSchema');
 const jwt = require('../util/jwt.ts')
 
 
@@ -25,7 +25,7 @@ module.exports = {
             }
 
             await AuthModel.create({ userName, email, password: hash })
-            const user = await User.UserModel.create(save);
+            const user = await UserModel.create(save);
 
             res.status(200).json({ user, success: true })
 
@@ -102,5 +102,32 @@ module.exports = {
             console.log(err)
             return res.status(404).send('username already used')
         }
+    },
+
+    async findUser(req, res) {
+        try {
+            const authUser = await AuthModel.findOne(req.body.query) ? true : false
+            return res.status(200).json({ exists: authUser })
+        } catch (err) {
+            console.log(err)
+            return res.status(404).send('username or email doesnt exists')
+        }
+    },
+    async reset(req, res) {
+        try {
+            const authUser = await AuthModel.findOne(req.body.query)
+            if (authUser) {
+                const saltRounds = process.env.SALT // store in env
+                const hash = await bcrypt.hash(req.body.password, Number(saltRounds))
+                await AuthModel.updateOne(authUser, {password: hash})
+                return res.status(200).json({success: true})
+            }
+
+            return res.status(200).json({success: false})
+        }
+         catch(err) {
+            console.log(err)
+            return res.status(404).send('Not succeessfully change password')
+    }
     }
 }

@@ -9,11 +9,13 @@ interface AuthModel extends Document {
 const AuthSchema: Schema = new Schema({
     userName: {
         type: String,
-        default: null
+        default: null,
+        unique: true
     },
     email: {
         type: String,
-        default: null
+        default: null,
+        unique: true
     },
     password: {
         type: String,

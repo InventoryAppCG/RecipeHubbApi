@@ -77,7 +77,7 @@ module.exports = {
   },
   async delete(req, res) {
     try {
-      await RecipeModel.deleteOne({ id: req.params.id }, req.body)
+      await RecipeModel.deleteOne({ _id: req.params.id }, req.body)
       res.status(200).send(`Successfully deleted ${req.params.id}`)
     } catch (err) {
       res.status(404).send('Err Deleting')

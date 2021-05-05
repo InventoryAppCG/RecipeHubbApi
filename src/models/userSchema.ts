@@ -14,15 +14,16 @@ interface UserModel extends Document {
 const UserSchema: Schema = new Schema({
         userName: {
             type: String,
-            default: null
+            default: null,
+            unique: true
         },
         firstName: {
             type: String,
-            default: null
+            default: null,
         },
         lastName: {
             type: String,
-            default: null
+            default: null,
         },
         city: {
             type: String,
@@ -34,7 +35,8 @@ const UserSchema: Schema = new Schema({
         },
         email: {
             type: String,
-            default: null
+            default: null,
+            unique: true
         },
         profilePic: {
             type: String,
@@ -45,7 +47,7 @@ const UserSchema: Schema = new Schema({
             default: 0
         },
        
-}, { timestamps: true});
+}, { timestamps: true });
 
 
 

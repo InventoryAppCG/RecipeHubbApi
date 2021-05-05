@@ -11,7 +11,6 @@ module.exports = {
             if (comments.length > 0){
 
                 //get ratings array
-                const ratings = comments.ratings
     
                 //adding rating value together
                 let total = 0
@@ -41,7 +40,7 @@ module.exports = {
             res.status(200).json(comments)
 
         } catch(err) {
-            console.log(err)
+          console.log(err)
             res.status(404).send(err)
         }
     },

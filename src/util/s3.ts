@@ -4,10 +4,10 @@ const s3Bucket = new AWS.S3({
     "secretAccessKey":process.env.secretAccessKey,
     "region":process.env.region,
     "signatureVersion": process.env.signatureVersion,
-      bucket: process.env.bucket
+      Bucket: process.env.bucket
 });
 
-console.log(process.env)
+console.log('PROCCESS',process.env)
 
 
 

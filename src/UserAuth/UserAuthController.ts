@@ -49,7 +49,6 @@ module.exports = {
     },
     async login(req, res) {
         try {
-
             // if they pass in either email or password
             const authUser = await AuthModel.findOne(req.body.query)
 

@@ -23,6 +23,16 @@ module.exports = {
 
     }
   },
+
+  async getUserById(req, res) {
+    try {
+      const user = await UserModel.findOne({_id: req.params.id});
+      res.json(user)
+    } catch (err) {
+      res.status(404).send(err)
+
+    }
+  },
   async data(req, res) {
     try {
       const user = {

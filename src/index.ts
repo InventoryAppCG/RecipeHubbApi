@@ -27,7 +27,15 @@ const corsOptions = {
   }
 }
 app.use(cors(corsOptions))
+app.use( function(req, res, next) {
 
+  if (req.originalUrl && req.originalUrl.split("/").pop() === 'favicon.ico') {
+    return res.sendStatus(204);
+  }
+
+  return next();
+
+});
 
 mongoose.connect(
   process.env.MONGO_API_KEY,
